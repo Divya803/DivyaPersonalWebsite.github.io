@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style04.css">
+        <script src="https://kit.fontawesome.com/ff0d24764d.js" crossorigin="anonymous"></script>
+        <script type="module">
+            
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+            import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+            
+        
+        
+            const firebaseConfig = {
+              apiKey: "AIzaSyAE8YYEbp18FPdWqqrY-UwnTBC2jsAp400",
+              authDomain: "contactme-91a36.firebaseapp.com",
+              databaseURL: "https://contactme-91a36-default-rtdb.firebaseio.com",
+              projectId: "contactme-91a36",
+              storageBucket: "contactme-91a36.appspot.com",
+              messagingSenderId: "202725590893",
+              appId: "1:202725590893:web:c68336097483b4d6193c64"
+            };
+          
+    
+            const app = initializeApp(firebaseConfig);
+        
+            const db = getDatabase(app);
+            console.log(db);
+        
+            document.getElementById("userform").addEventListener("submit", function (e) {
+        
+              e.preventDefault();
+              let userId = document.getElementById("name").value;
+              let email = document.getElementById("email").value;
+              let massage = document.getElementById("message").value;
+        
+              set(ref(db, 'users/' + userId), {
+    
+                email: email,
+                massage: massage,
+    
+        
+              });
+            });
+
+        </script>
+    </head>
+    <body>
+        <div id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="contactleft">
+                        <h1 class="subtitle">Contact Me</h1>
+                        <p><i class="fa-sharp fa-solid fa-paper-plane"></i>Contact@gmail.com</p>
+                        <p><i class="fa-solid fa-phone"></i>0123456789</p>
+                        <div class="socialicons">
+                            <a href=""><i class="fa-brands fa-facebook"></i></a>
+                            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                            <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+                            <a href=""><i class="fa-brands fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="contactright">
+                        <form method="Post" id="userform">
+                            <input type="text" name="name" placeholder="Your Name" class="inputname" id="name" required>
+                            <input type="email" name="email" placeholder="Your Email" id="email" required>
+                            <textarea name="message" rows="6" placeholder="Your Message" id="message"></textarea>
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
